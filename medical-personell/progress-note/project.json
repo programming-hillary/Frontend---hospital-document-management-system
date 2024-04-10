@@ -1,0 +1,9 @@
+{
+  "name": "progress-note",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "medical-personell/progress-note/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project progress-note --web",
+  "targets": {}
+}

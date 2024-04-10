@@ -1,0 +1,9 @@
+{
+  "name": "insurance-forms",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "patient_docs/insurance-forms/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project insurance-forms --web",
+  "targets": {}
+}

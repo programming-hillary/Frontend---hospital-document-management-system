@@ -1,0 +1,9 @@
+{
+  "name": "information-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "hospital-docs/information-system/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project information-system --web",
+  "targets": {}
+}

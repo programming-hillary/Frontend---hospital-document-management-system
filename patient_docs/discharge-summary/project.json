@@ -1,0 +1,9 @@
+{
+  "name": "discharge-summary",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "patient_docs/discharge-summary/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project discharge-summary --web",
+  "targets": {}
+}

@@ -1,0 +1,59 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@org.mwashi-mwale/consent-forms": [
+        "patient_docs/consent-forms/src/index.ts"
+      ],
+      "@org.mwashi-mwale/discharge-summary": [
+        "patient_docs/discharge-summary/src/index.ts"
+      ],
+      "@org.mwashi-mwale/forgot-password": ["forgot-password/src/index.ts"],
+      "@org.mwashi-mwale/health-surveys": [
+        "hospital-docs/health-surveys/src/index.ts"
+      ],
+      "@org.mwashi-mwale/homepage": ["homepage/src/index.ts"],
+      "@org.mwashi-mwale/hospital": ["hospital/src/index.ts"],
+      "@org.mwashi-mwale/information-system": [
+        "hospital-docs/information-system/src/index.ts"
+      ],
+      "@org.mwashi-mwale/insurance-forms": [
+        "patient_docs/insurance-forms/src/index.ts"
+      ],
+      "@org.mwashi-mwale/login": ["login/src/index.ts"],
+      "@org.mwashi-mwale/medical-personell": ["medical-personell/src/index.ts"],
+      "@org.mwashi-mwale/medical-report": [
+        "patient_docs/medical-report/src/index.ts"
+      ],
+      "@org.mwashi-mwale/medical-tests": [
+        "patient_docs/medical-tests/src/index.ts"
+      ],
+      "@org.mwashi-mwale/mental-status-exams": [
+        "patient_docs/mental-status-exams/src/index.ts"
+      ],
+      "@org.mwashi-mwale/my-docs": ["my-docs/src/index.ts"],
+      "@org.mwashi-mwale/operative-reports": [
+        "medical-personell/operative-reports/src/index.ts"
+      ],
+      "@org.mwashi-mwale/progress-note": [
+        "medical-personell/progress-note/src/index.ts"
+      ],
+      "@org.mwashi-mwale/sign-up": ["sign-up/src/index.ts"],
+      "@org.mwashi-mwale/verify-email": ["verify-email/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

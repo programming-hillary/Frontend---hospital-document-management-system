@@ -1,0 +1,9 @@
+{
+  "name": "medical-report",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "patient_docs/medical-report/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project medical-report --web",
+  "targets": {}
+}

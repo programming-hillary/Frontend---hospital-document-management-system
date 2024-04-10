@@ -1,0 +1,9 @@
+{
+  "name": "mental-status-exams",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "patient_docs/mental-status-exams/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project mental-status-exams --web",
+  "targets": {}
+}

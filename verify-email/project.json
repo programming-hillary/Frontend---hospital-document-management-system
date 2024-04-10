@@ -1,0 +1,9 @@
+{
+  "name": "verify-email",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "verify-email/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project verify-email --web",
+  "targets": {}
+}
