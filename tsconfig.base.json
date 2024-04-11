@@ -15,9 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@org.mwashi-mwale/analytics": ["modules/analytics/src/index.ts"],
       "@org.mwashi-mwale/consent-forms": [
         "modules/patient_docs/consent-forms/src/index.ts"
       ],
+      "@org.mwashi-mwale/dash_home": ["modules/dash_home/src/index.ts"],
       "@org.mwashi-mwale/discharge-summary": [
         "modules/patient_docs/discharge-summary/src/index.ts"
       ],
@@ -27,6 +29,7 @@
       "@org.mwashi-mwale/health-surveys": [
         "modules/hospital_docs/health-surveys/src/index.ts"
       ],
+      "@org.mwashi-mwale/help": ["modules/help/src/index.ts"],
       "@org.mwashi-mwale/homepage": ["modules/homepage/src/index.ts"],
       "@org.mwashi-mwale/hospital_docs": ["modules/hospital_docs/src/index.ts"],
       "@org.mwashi-mwale/information-system": [
@@ -49,12 +52,15 @@
         "modules/patient_docs/mental-status-exams/src/index.ts"
       ],
       "@org.mwashi-mwale/my-docs": ["modules/my-docs/src/index.ts"],
+      "@org.mwashi-mwale/my_history": ["modules/my_history/src/index.ts"],
       "@org.mwashi-mwale/operative-reports": [
         "modules/medical-personell/operative-reports/src/index.ts"
       ],
       "@org.mwashi-mwale/progress-note": [
         "modules/medical-personell/progress-note/src/index.ts"
       ],
+      "@org.mwashi-mwale/search": ["modules/search/src/index.ts"],
+      "@org.mwashi-mwale/settings": ["modules/settings/src/index.ts"],
       "@org.mwashi-mwale/sign-up": ["modules/sign-up/src/index.ts"],
       "@org.mwashi-mwale/verify-email": ["modules/verify-email/src/index.ts"]
     }

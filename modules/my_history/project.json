@@ -1,0 +1,9 @@
+{
+  "name": "my_history",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "modules/my_history/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project my_history --web",
+  "targets": {}
+}

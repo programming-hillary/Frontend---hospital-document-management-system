@@ -5,74 +5,68 @@ import {
   faBarChart,
   faCog,
   faQuestionCircle,
+  faSearch,
   faSignOutAlt,
   faTasks,
-  faTimes,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import {
-  faDochub,
-  faFacebook,
-  faGit,
-  faGoogle,
-  faGoogleDrive,
-  faYoutube,
-} from '@fortawesome/free-brands-svg-icons';
+import { faDochub } from '@fortawesome/free-brands-svg-icons';
+import { Link, Outlet } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface HomepageProps {}
 
 export function Homepage(props: HomepageProps) {
   return (
-    <div className={styles.container}>
-      <div className="container">
+    <div className={styles.wrapper}>
+      <div className="my_container">
         <nav>
           <div className="navbar">
             <div className="logo">
-              <img src="/logos/HosDocs__logo-with-text.png" alt="" />
+              <img src="/logos/HosDocs__logo-with-text.png" alt="Logo" />
             </div>
             <ul>
               <li>
-                <a href="#">
+                <Link to="./">
                   <FontAwesomeIcon icon={faUser} className="icon" />
-                  <span className="nav-item">Dashboard</span>
-                </a>
+                  <span className="nav-item">Home</span>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="analytics">
                   <FontAwesomeIcon icon={faBarChart} className="icon" />
                   <span className="nav-item">Analytics</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="my_history">
                   <FontAwesomeIcon icon={faTasks} className="icon" />
-                  <span className="nav-item">Jobs Board</span>
-                </a>
+                  <span className="nav-item">My History</span>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="my_docs">
                   <FontAwesomeIcon icon={faDochub} className="icon" />
-                  <span className="nav-item">Documnents</span>
-                </a>
+                  <span className="nav-item">My Documenents</span>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="settings">
                   <FontAwesomeIcon icon={faCog} className="icon" />
                   <span className="nav-item">Setting</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#">
+                <Link to="help">
                   <FontAwesomeIcon icon={faQuestionCircle} className="icon" />
                   <span className="nav-item">Help</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="logout">
+                <Link to="/" className="logout">
                   <FontAwesomeIcon icon={faSignOutAlt} className="icon" />
                   <span className="nav-item">Logout</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -83,107 +77,39 @@ export function Homepage(props: HomepageProps) {
             <p>Take care of what matters!</p>
           </div>
           <div className="main-body">
-            <h1>Recent Jobs</h1>
+            <h1>Hospital Documents</h1>
 
             <div className="search_bar">
-              <input type="search" placeholder="Search job here..." />
-              <select name="" id="">
-                <option>Category</option>
-                <option>Web Design</option>
-                <option>App Design</option>
-                <option>App Development</option>
+              <div className="searchInputBar">
+                <input type="search" placeholder="Search documents here..." className="inputText" />
+                <Link to="search">
+                  <FontAwesomeIcon icon={faSearch} className='searchBtn' />
+                </Link>
+              </div>
+              <select name="category" id="">
+                <option>-- SELECT DOCUMENT CATEGORY --</option>
+                <option>Hospital Documents</option>
+                <option>Doctor's Documents</option>
+                <option>Patient Documents</option>
               </select>
-              <select className="filter">
-                <option>Filter</option>
+              <select name="filter" id="filter" className="filter">
+                <option>-- FILTERS --</option>
+                <option>Health Surveys</option>
+                <option>Information Systems</option>
+                <option>----------------------</option>
+                <option>Operative Reportss</option>
+                <option>Progress Notes</option>
+                <option>----------------------</option>
+                <option>Consent Forms</option>
+                <option>Discharge Summary</option>
+                <option>Insurance Forms</option>
+                <option>Medical Reports</option>
+                <option>Medical Tests</option>
+                <option>medical Status Exams</option>
+                <option>----------------------</option>
               </select>
             </div>
-
-            <div className="row">
-              <p>
-                There are more than <span>400</span> Documents
-              </p>
-              <a href="#">See all</a>
-            </div>
-
-            <div className="job_card">
-              <div className="job_details">
-                <div className="img">
-                  <FontAwesomeIcon icon={faGoogleDrive} className="icon" />
-                </div>
-                <div className="text">
-                  <h2>UX Designer</h2>
-                  <span>Google Drive - Junior Post</span>
-                </div>
-              </div>
-              <div className="job_salary">
-                <h4>$6.7 - $12.5k /yr</h4>
-                <span>1 days ago</span>
-              </div>
-            </div>
-
-            <div className="job_card">
-              <div className="job_details">
-                <div className="img">
-                  <FontAwesomeIcon icon={faGoogle} className="icon" />
-                </div>
-                <div className="text">
-                  <h2>JavaScript Developer</h2>
-                  <span>Google - Senior Post</span>
-                </div>
-              </div>
-              <div className="job_salary">
-                <h4>$8.7 - $13.2k /yr</h4>
-                <span>2 days ago</span>
-              </div>
-            </div>
-
-            <div className="job_card">
-              <div className="job_details">
-                <div className="img">
-                  <FontAwesomeIcon icon={faFacebook} className="icon" />
-                </div>
-                <div className="text">
-                  <h2>Product Developer</h2>
-                  <span>Facbook - Manager Post</span>
-                </div>
-              </div>
-              <div className="job_salary">
-                <h4>$11 - $18.5k /yr</h4>
-                <span>2 days ago</span>
-              </div>
-            </div>
-
-            <div className="job_card">
-              <div className="job_details">
-                <div className="img">
-                  <FontAwesomeIcon icon={faGit} className="icon" />
-                </div>
-                <div className="text">
-                  <h2>Programmer</h2>
-                  <span>Github - Juni Post</span>
-                </div>
-              </div>
-              <div className="job_salary">
-                <h4>$6 - $11.5k /yr</h4>
-                <span>3 days ago</span>
-              </div>
-            </div>
-
-            <div className="job_card">
-              <div className="job_details">
-                <div className="img">
-                  <FontAwesomeIcon icon={faYoutube} className="icon" />
-                </div>
-                <div className="text">
-                  <h2>React.js Expert</h2>
-                  <span>Youtube - VIP</span>
-                </div>
-              </div>
-              <div className="job_salary">
-                <h4>$12.5 - $25.5k /yr</h4>
-                <span>4 days ago</span>
-              </div>
-            </div>
+            <Outlet />
           </div>
         </section>
       </div>

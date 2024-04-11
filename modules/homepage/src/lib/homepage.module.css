@@ -5,7 +5,7 @@
  * .container {
  * }
 */
-.container {
+.wrapper {
     width: 100%;
     background-image: url('/images/dashboard_page__bg.png');
     min-height: 100vh;
