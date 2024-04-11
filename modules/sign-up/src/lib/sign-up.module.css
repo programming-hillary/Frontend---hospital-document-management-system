@@ -1,0 +1,42 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.container {
+    width: 100%;
+    background-image: url('/images/auth_pages__bg.png');
+    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+}
+
+.welcome {
+    padding-bottom: 2rem;
+    text-transform: capitalize;
+}
+
+.register_question {
+    display: block;
+    padding-top: 1rem;
+    text-decoration: none;
+}
+
+.phone {
+    display: inline-block;
+    width: 300px;
+}
+
+.code {
+    width: 60px;
+    display: inline-block;
+}

@@ -1,12 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
-import NxWelcome from './nx-welcome';
+import Landing_Page from './Landing_Page';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="org.mwashi-mwale" />
+      <Landing_Page />
     </div>
   );
 }

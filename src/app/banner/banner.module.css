@@ -1,0 +1,40 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 3rem;
+    color: white;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome_note {
+    font-family: exo2-italic;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.banner {
+    font-size: 10rem;
+    text-transform: uppercase;
+    line-height: 15rem;
+    font-weight: bolder;
+}
+
+.tagline {
+    font-family: satisfy;
+    font-size: 2rem;
+}

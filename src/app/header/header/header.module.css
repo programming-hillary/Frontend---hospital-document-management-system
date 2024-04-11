@@ -1,0 +1,48 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.container {
+  background-color: #00000077;
+  display: flex;
+  flex-direction: row;
+  padding: .75rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login_btn {
+  padding: 1rem 1.5rem;
+  border: 1px solid #00b3ff;
+  font-size: 20px;
+  border-radius: 20px;
+  background: transparent;
+  color: #ddd;
+  
+}
+
+.register_btn {
+  color: #fff;
+  font-weight: bold;
+  padding: 1rem 1.5rem;
+  border: none;
+  font-size: 20px;
+  border-radius: 20px;
+  background-color: #00b3ff;
+}
