@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBarChart,
   faCog,
+  faPeopleGroup,
   faQuestionCircle,
   faSearch,
   faSignOutAlt,
@@ -12,11 +13,26 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faDochub } from '@fortawesome/free-brands-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
+import {
+  DocumentsApiService,
+  useDocumentContext,
+} from '@org.mwashi-mwale/documents_api_service';
+import {
+  SearchApiService,
+  useSearchContext,
+} from '@org.mwashi-mwale/search_api_service';
+import {
+  VersionsApiService,
+  useVersionsContext,
+} from '@org.mwashi-mwale/versions_api_service';
 
 /* eslint-disable-next-line */
 export interface HomepageProps {}
 
 export function Homepage(props: HomepageProps) {
+  const documents = useDocumentContext();
+  const searches = useSearchContext();
+  const versions = useVersionsContext();
   return (
     <div className={styles.wrapper}>
       <div className="my_container">
@@ -35,19 +51,19 @@ export function Homepage(props: HomepageProps) {
               <li>
                 <Link to="analytics">
                   <FontAwesomeIcon icon={faBarChart} className="icon" />
-                  <span className="nav-item">Analytics</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="my_history">
-                  <FontAwesomeIcon icon={faTasks} className="icon" />
-                  <span className="nav-item">My History</span>
+                  <span className="nav-item">All Documents</span>
                 </Link>
               </li>
               <li>
                 <Link to="my_docs">
                   <FontAwesomeIcon icon={faDochub} className="icon" />
-                  <span className="nav-item">My Documenents</span>
+                  <span className="nav-item">Add Documenents</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="my_history">
+                  <FontAwesomeIcon icon={faPeopleGroup} className="icon" />
+                  <span className="nav-item">Meet</span>
                 </Link>
               </li>
               <li>
@@ -77,39 +93,49 @@ export function Homepage(props: HomepageProps) {
             <p>Take care of what matters!</p>
           </div>
           <div className="main-body">
-            <h1>Hospital Documents</h1>
+            <SearchApiService.Provider value={searches}>
+              <VersionsApiService.Provider value={versions}>
+                <h1>Hospital Documents</h1>
 
-            <div className="search_bar">
-              <div className="searchInputBar">
-                <input type="search" placeholder="Search documents here..." className="inputText" />
-                <Link to="search">
-                  <FontAwesomeIcon icon={faSearch} className='searchBtn' />
-                </Link>
-              </div>
-              <select name="category" id="">
-                <option>-- SELECT DOCUMENT CATEGORY --</option>
-                <option>Hospital Documents</option>
-                <option>Doctor's Documents</option>
-                <option>Patient Documents</option>
-              </select>
-              <select name="filter" id="filter" className="filter">
-                <option>-- FILTERS --</option>
-                <option>Health Surveys</option>
-                <option>Information Systems</option>
-                <option>----------------------</option>
-                <option>Operative Reportss</option>
-                <option>Progress Notes</option>
-                <option>----------------------</option>
-                <option>Consent Forms</option>
-                <option>Discharge Summary</option>
-                <option>Insurance Forms</option>
-                <option>Medical Reports</option>
-                <option>Medical Tests</option>
-                <option>medical Status Exams</option>
-                <option>----------------------</option>
-              </select>
-            </div>
-            <Outlet />
+                <div className="search_bar">
+                  <div className="searchInputBar">
+                    <input
+                      type="search"
+                      placeholder="Search documents here..."
+                      className="inputText"
+                    />
+                    <Link to="search">
+                      <FontAwesomeIcon icon={faSearch} className="searchBtn" />
+                    </Link>
+                  </div>
+                  <select name="category" id="">
+                    <option>-- SELECT DOCUMENT CATEGORY --</option>
+                    <option>Hospital Documents</option>
+                    <option>Doctor's Documents</option>
+                    <option>Patient Documents</option>
+                  </select>
+                  <select name="filter" id="filter" className="filter">
+                    <option>-- FILTERS --</option>
+                    <option>Health Surveys</option>
+                    <option>Information Systems</option>
+                    <option>----------------------</option>
+                    <option>Operative Reportss</option>
+                    <option>Progress Notes</option>
+                    <option>----------------------</option>
+                    <option>Consent Forms</option>
+                    <option>Discharge Summary</option>
+                    <option>Insurance Forms</option>
+                    <option>Medical Reports</option>
+                    <option>Medical Tests</option>
+                    <option>medical Status Exams</option>
+                    <option>----------------------</option>
+                  </select>
+                </div>
+                <DocumentsApiService.Provider value={documents}>
+                  <Outlet />
+                </DocumentsApiService.Provider>
+              </VersionsApiService.Provider>
+            </SearchApiService.Provider>
           </div>
         </section>
       </div>

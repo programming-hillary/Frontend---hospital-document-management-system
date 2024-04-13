@@ -2,16 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './DocCard.module.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faClose, faDeleteLeft, faDownload, faEdit, faEllipsisV, faShareAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Popover, Button } from 'antd';
 import { useState } from 'react';
-import FileOptions from './FileOptions';
-import { Content } from 'antd/es/layout/layout';
+import { UserCategory } from './user-category';
 
 /* eslint-disable-next-line */
 export interface DocCardProps {
   icon: IconProp;
-  category: string;
+  category: UserCategory;
   description: string;
   date: string;
   format: string;

@@ -1,20 +1,14 @@
-import {
-  faGoogleDrive,
-  faGoogle,
-  faFacebook,
-  faGit,
-  faYoutube,
-} from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './dash_home.module.css';
+import { useContext } from 'react';
 import './dash-home.css';
 import DocCard from './DocCard/DocCard';
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { DocumentsApiService } from '@org.mwashi-mwale/documents_api_service';
 
 /* eslint-disable-next-line */
 export interface DashHomeProps {}
 
+
 export function DashHome(props: DashHomeProps) {
+ const documentContext = useContext(DocumentsApiService)
   return (
     <section className="main_dash">
       <div className="row">
@@ -24,8 +18,13 @@ export function DashHome(props: DashHomeProps) {
         <a href="#">See all</a>
       </div>
 
-      <DocCard icon={faFilePdf} category="Kamau's discharge" description="Doctor's Document" date="20th May 2024" format="PDF" />
-
+      <DocCard
+        icon={documentContext!.icon}
+        category={documentContext!.category}
+        description={documentContext!.description}
+        date={documentContext!.date}
+        format={documentContext!.format}
+      />
     </section>
   );
 }

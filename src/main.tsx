@@ -13,14 +13,15 @@ import { SignUp } from '@org.mwashi-mwale/sign-up';
 import { Homepage } from '@org.mwashi-mwale/homepage';
 import { VerifyEmail } from '@org.mwashi-mwale/verify-email';
 import { ForgotPassword } from '@org.mwashi-mwale/forgot-password';
-import { MyDocs } from '@org.mwashi-mwale/my-docs'
-import {DashHome} from '@org.mwashi-mwale/dash_home'
-import {MyHistory} from '@org.mwashi-mwale/my_history'
-import {Analytics} from '@org.mwashi-mwale/analytics'
-import {Settings} from '@org.mwashi-mwale/settings'
-import {Help} from '@org.mwashi-mwale/help'
-import {Search} from '@org.mwashi-mwale/search'
+import { MyDocs } from '@org.mwashi-mwale/my-docs';
+import { DashHome } from '@org.mwashi-mwale/dash_home';
+import { MyHistory } from '@org.mwashi-mwale/my_history';
+import { Analytics } from '@org.mwashi-mwale/analytics';
+import { Settings } from '@org.mwashi-mwale/settings';
+import { Help } from '@org.mwashi-mwale/help';
+import { Search } from '@org.mwashi-mwale/search';
 import { FileOptions } from '@org.mwashi-mwale/dash_home';
+import { UserApiService, useUserContext } from '@org.mwashi-mwale/api_service';
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,9 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'more_options',
-            element: <FileOptions />
-          }
-        ]
+            element: <FileOptions />,
+          },
+        ],
       },
       {
         path: 'my_docs',
@@ -63,8 +64,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'search',
-        element: <Search />
-      }
+        element: <Search />,
+      },
     ],
   },
   {
@@ -84,12 +85,11 @@ const router = createBrowserRouter([
     element: <VerifyEmail />,
   },
 ]);
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </StrictMode>
 );

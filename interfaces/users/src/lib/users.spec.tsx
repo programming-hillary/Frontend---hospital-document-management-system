@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Footer from './footer';
+import Users from './users';
 
-describe('Footer', () => {
+describe('Users', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Footer />);
+    const { baseElement } = render(<Users />);
     expect(baseElement).toBeTruthy();
   });
 });

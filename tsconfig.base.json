@@ -16,12 +16,17 @@
     "baseUrl": ".",
     "paths": {
       "@org.mwashi-mwale/analytics": ["modules/analytics/src/index.ts"],
+      "@org.mwashi-mwale/api_service": ["api/api_service/src/index.ts"],
       "@org.mwashi-mwale/consent-forms": [
         "modules/patient_docs/consent-forms/src/index.ts"
       ],
       "@org.mwashi-mwale/dash_home": ["modules/dash_home/src/index.ts"],
       "@org.mwashi-mwale/discharge-summary": [
         "modules/patient_docs/discharge-summary/src/index.ts"
+      ],
+      "@org.mwashi-mwale/documents": ["interfaces/documents/src/index.ts"],
+      "@org.mwashi-mwale/documents_api_service": [
+        "api/documents_api_service/src/index.ts"
       ],
       "@org.mwashi-mwale/forgot-password": [
         "modules/forgot-password/src/index.ts"
@@ -60,9 +65,18 @@
         "modules/medical-personell/progress-note/src/index.ts"
       ],
       "@org.mwashi-mwale/search": ["modules/search/src/index.ts"],
+      "@org.mwashi-mwale/search_api_service": [
+        "api/search_api_service/src/index.ts"
+      ],
+      "@org.mwashi-mwale/searches": ["interfaces/searches/src/index.ts"],
       "@org.mwashi-mwale/settings": ["modules/settings/src/index.ts"],
       "@org.mwashi-mwale/sign-up": ["modules/sign-up/src/index.ts"],
-      "@org.mwashi-mwale/verify-email": ["modules/verify-email/src/index.ts"]
+      "@org.mwashi-mwale/users": ["interfaces/users/src/index.ts"],
+      "@org.mwashi-mwale/verify-email": ["modules/verify-email/src/index.ts"],
+      "@org.mwashi-mwale/versions": ["interfaces/versions/src/index.ts"],
+      "@org.mwashi-mwale/versions_api_service": [
+        "api/versions_api_service/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

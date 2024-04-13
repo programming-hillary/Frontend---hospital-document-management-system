@@ -10,7 +10,7 @@ const Landing_Page = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <div className="my_container">
+        <div className={styles.my_container}>
           <div className="my_row">
             <div className="my_header">
               <Header />
