@@ -27,6 +27,9 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: (
+      <h1>Code works, but something went wrong from the API side. 😜😜😜</h1>
+    ),
   },
   {
     path: '/dashboard',
@@ -90,6 +93,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </StrictMode>
 );

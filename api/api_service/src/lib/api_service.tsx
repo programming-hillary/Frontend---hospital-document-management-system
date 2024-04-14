@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useReducer } from 'react';
 import { Users } from '@org.mwashi-mwale/users';
 import axios from 'axios';
 
@@ -94,8 +94,12 @@ const reducer = (state: any, action: { type: any; payload: any }) => {
   }
 };
 
-const userApiCall = (): Users => {
-  const [hosDocUsers, dispatch] = useReducer(reducer, initialState);
+interface Props {
+  children: ReactNode
+}
+
+const UserProvider = ({children}: Props): Users => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const getDoctcors = () => {
@@ -215,10 +219,14 @@ const userApiCall = (): Users => {
     addPatients()
     deletePatients()
   }, []);
-  return hosDocUsers
+  return (
+    <UserApiService.Provider value={[state, dispatch]}>
+      {children}
+    </UserApiService.Provider>
+  );
 };
 
-export const UserApiService = createContext<Users | undefined>(userApiCall);
+export const UserApiService = createContext<Users | undefined>(undefined);
 
 export function useUserContext() {
   const user = useContext(UserApiService);

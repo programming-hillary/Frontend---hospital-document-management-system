@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Searches } from '@org.mwashi-mwale/searches';
 
@@ -51,8 +51,16 @@ const reducer = (state: any, action: { type: any; payload: any }) => {
   }
 };
 
-const searchApiCall = () => {
-  const [hosDocSearch, dispatch] = useReducer(reducer, initialState);
+interface Props {
+  children: ReactNode
+}
+
+export const SearchApiService = createContext<Searches | undefined>(
+  undefined
+);
+
+export const SearchProvider = ({children}: Props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const editSearch = () => {
@@ -84,11 +92,12 @@ const searchApiCall = () => {
     editSearch()
     addSearch()
   }, []);
-  return hosDocSearch
+  return (
+    <SearchApiService.Provider value={[state, dispatch]}>
+      {children}
+    </SearchApiService.Provider>
+  );
 };
-export const SearchApiService = createContext<Searches | undefined>(
-  searchApiCall
-);
 
 export function useSearchContext() {
   const Search = useContext(SearchApiService);

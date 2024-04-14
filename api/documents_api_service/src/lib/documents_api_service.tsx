@@ -1,6 +1,14 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import axios from 'axios';
 import { Documents } from '@org.mwashi-mwale/documents';
+import { UserCategory } from './user-category';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 axios.defaults.baseURL = 'http://localhost:8080/auth';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -11,10 +19,8 @@ axios.defaults.headers.put['Content-Type'] =
 axios.defaults.headers.delete['Content-Type'] = 'application/json';
 
 const ACTIONS = {
-  GET_DOCUMENTS: 'get_documents',
   EDIT_DOCUMENTS: 'edit_documents',
   ADD_DOCUMENTS: 'post_documents',
-  DELETE_DOCUMENTS: 'delete_documents',
 
   ERROR: 'error',
 };
@@ -22,18 +28,18 @@ const ACTIONS = {
 const initialState = {
   loading: true,
   error: false,
-  documents: {},
+  documents: {
+    icon,
+    category: UserCategory,
+    description: '',
+    date: '',
+    format: '',
+  },
 };
 
 const reducer = (state: any, action: { type: any; payload: any }) => {
   // return { documents : state.documents}
   switch (action.type) {
-    case ACTIONS.GET_DOCUMENTS:
-      return {
-        loading: false,
-        error: false,
-        documents: action.payload,
-      };
     case ACTIONS.ADD_DOCUMENTS:
       return {
         loading: false,
@@ -41,12 +47,6 @@ const reducer = (state: any, action: { type: any; payload: any }) => {
         documents: action.payload,
       };
     case ACTIONS.EDIT_DOCUMENTS:
-      return {
-        loading: false,
-        error: false,
-        documents: action.payload,
-      };
-    case ACTIONS.DELETE_DOCUMENTS:
       return {
         loading: false,
         error: false,
@@ -65,26 +65,21 @@ const reducer = (state: any, action: { type: any; payload: any }) => {
   }
 };
 
-const documentsApiCall = (): Documents => {
-  const [hosDocDocuments, dispatch] = useReducer(reducer, initialState);
+interface Props {
+  children: ReactNode;
+}
+
+export const DocumentsApiService = createContext<Documents | undefined>(
+  undefined
+);
+
+export const DocumentProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const getDocuments = () => {
-      axios
-        .get('/documents')
-        .then((response) => {
-          dispatch({ type: ACTIONS.GET_DOCUMENTS, payload: response.data });
-        })
-        .catch((e) => {
-          return dispatch({
-            type: ACTIONS.ERROR,
-            payload: undefined,
-          });
-        });
-    };
     const editDocuments = () => {
       axios
-        .put('/documents')
+        .put('/Documents')
         .then((response) => {
           dispatch({ type: ACTIONS.EDIT_DOCUMENTS, payload: response.data });
         })
@@ -97,7 +92,7 @@ const documentsApiCall = (): Documents => {
     };
     const addDocuments = () => {
       axios
-        .post('/documents')
+        .post('/Documents')
         .then((response) => {
           dispatch({ type: ACTIONS.ADD_DOCUMENTS, payload: response.data });
         })
@@ -108,40 +103,26 @@ const documentsApiCall = (): Documents => {
           });
         });
     };
-    const deleteDocuments = () => {
-      axios
-        .delete('/documents')
-        .then((response) => {
-          dispatch({ type: ACTIONS.DELETE_DOCUMENTS, payload: response.data });
-        })
-        .catch((e) => {
-          return dispatch({
-            type: ACTIONS.ERROR,
-            payload: undefined,
-          });
-        });
-    };
-    getDocuments();
     editDocuments();
     addDocuments();
-    deleteDocuments();
   }, []);
-  return hosDocDocuments;
+  return (
+    <DocumentsApiService.Provider value={[state, dispatch]}>
+      {children}
+    </DocumentsApiService.Provider>
+  );
 };
-export const DocumentsApiService = createContext<Documents | undefined>(
-  documentsApiCall()
-);
 
 export function useDocumentContext() {
-  const document = useContext(DocumentsApiService);
+  const documents = useContext(DocumentsApiService);
 
-  if (document == undefined) {
+  if (documents == undefined) {
     throw new Error(
-      'useDocumentContext should be used with DocumentApiservice'
+      'useDocumentsContext should be used with DocumentsApiservice'
     );
   }
 
-  return document;
+  return documents;
 }
 
 export default useDocumentContext;

@@ -1,14 +1,13 @@
 import { useContext } from 'react';
 import './dash-home.css';
 import DocCard from './DocCard/DocCard';
-import { DocumentsApiService } from '@org.mwashi-mwale/documents_api_service';
+import { useDocumentContext } from '@org.mwashi-mwale/documents_api_service';
 
 /* eslint-disable-next-line */
 export interface DashHomeProps {}
 
-
 export function DashHome(props: DashHomeProps) {
- const documentContext = useContext(DocumentsApiService)
+ const documentContext = useDocumentContext()
   return (
     <section className="main_dash">
       <div className="row">

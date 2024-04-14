@@ -14,15 +14,18 @@ import {
 import { faDochub } from '@fortawesome/free-brands-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
 import {
+  DocumentProvider,
   DocumentsApiService,
   useDocumentContext,
 } from '@org.mwashi-mwale/documents_api_service';
 import {
   SearchApiService,
+  SearchProvider,
   useSearchContext,
 } from '@org.mwashi-mwale/search_api_service';
 import {
   VersionsApiService,
+  VersionsProvider,
   useVersionsContext,
 } from '@org.mwashi-mwale/versions_api_service';
 
@@ -93,8 +96,8 @@ export function Homepage(props: HomepageProps) {
             <p>Take care of what matters!</p>
           </div>
           <div className="main-body">
-            <SearchApiService.Provider value={searches}>
-              <VersionsApiService.Provider value={versions}>
+            <SearchProvider>
+              <VersionsProvider>
                 <h1>Hospital Documents</h1>
 
                 <div className="search_bar">
@@ -131,11 +134,11 @@ export function Homepage(props: HomepageProps) {
                     <option>----------------------</option>
                   </select>
                 </div>
-                <DocumentsApiService.Provider value={documents}>
+                <DocumentProvider>
                   <Outlet />
-                </DocumentsApiService.Provider>
-              </VersionsApiService.Provider>
-            </SearchApiService.Provider>
+                </DocumentProvider>
+              </VersionsProvider>
+            </SearchProvider>
           </div>
         </section>
       </div>

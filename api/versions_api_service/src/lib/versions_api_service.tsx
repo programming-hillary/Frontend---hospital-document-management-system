@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import axios from 'axios';
 import { Versions } from '@org.mwashi-mwale/versions';
 
@@ -44,8 +50,12 @@ const reducer = (state: any, action: { type: any; payload: any }) => {
   }
 };
 
-const versionsApiCall = () => {
-  const [hosDocVersions, dispatch] = useReducer(reducer, initialState);
+interface Props {
+  children: ReactNode;
+}
+
+export const VersionsProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const getVersions = () => {
@@ -61,12 +71,16 @@ const versionsApiCall = () => {
           });
         });
     };
-    getVersions()
+    getVersions();
   }, []);
-  return hosDocVersions
+  return (
+    <VersionsApiService.Provider value={[state, dispatch]}>
+      {children}
+    </VersionsApiService.Provider>
+  );
 };
 export const VersionsApiService = createContext<Versions | undefined>(
-  versionsApiCall
+  undefined
 );
 
 export function useVersionsContext() {
