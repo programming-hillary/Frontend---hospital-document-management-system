@@ -1,14 +1,11 @@
 import {
   ReactNode,
-  createContext,
   useContext,
   useEffect,
-  useReducer,
 } from 'react';
 import axios from 'axios';
 import { Documents } from '@org.mwashi-mwale/documents';
-import { UserCategory } from './user-category';
-import { icon } from '@fortawesome/fontawesome-svg-core';
+import React from 'react';
 
 axios.defaults.baseURL = 'http://localhost:8080/auth';
 axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -18,103 +15,63 @@ axios.defaults.headers.put['Content-Type'] =
   'application/x-www-form-urlencoded';
 axios.defaults.headers.delete['Content-Type'] = 'application/json';
 
-const ACTIONS = {
-  EDIT_DOCUMENTS: 'edit_documents',
-  ADD_DOCUMENTS: 'post_documents',
+type IDocumentItem = [
+  Documents[] | undefined,
+  React.Dispatch<React.SetStateAction<Documents[] | undefined>>
+];
 
-  ERROR: 'error',
-};
-
-const initialState = {
-  loading: true,
-  error: false,
-  documents: {
-    icon,
-    category: UserCategory,
-    description: '',
-    date: '',
-    format: '',
-  },
-};
-
-const reducer = (state: any, action: { type: any; payload: any }) => {
-  // return { documents : state.documents}
-  switch (action.type) {
-    case ACTIONS.ADD_DOCUMENTS:
-      return {
-        loading: false,
-        error: false,
-        documents: action.payload,
-      };
-    case ACTIONS.EDIT_DOCUMENTS:
-      return {
-        loading: false,
-        error: false,
-        documents: action.payload,
-      };
-
-    case ACTIONS.ERROR:
-      return {
-        loading: false,
-        error: true,
-        documents: [],
-      };
-
-    default:
-      return state;
-  }
-};
+export const IDocumentContext = React.createContext<IDocumentItem>([
+  [],
+  () => null,
+]);
 
 interface Props {
   children: ReactNode;
 }
 
-export const DocumentsApiService = createContext<Documents | undefined>(
-  undefined
-);
-
 export const DocumentProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const editDocuments = () => {
+    useEffect(() => {
+      axios.put('/Documents').catch((e) => {
+        return '';
+      });
+    }),
+      [];
+  };
 
-  useEffect(() => {
-    const editDocuments = () => {
-      axios
-        .put('/Documents')
-        .then((response) => {
-          dispatch({ type: ACTIONS.EDIT_DOCUMENTS, payload: response.data });
-        })
-        .catch((e) => {
-          return dispatch({
-            type: ACTIONS.ERROR,
-            payload: undefined,
-          });
-        });
-    };
-    const addDocuments = () => {
-      axios
-        .post('/Documents')
-        .then((response) => {
-          dispatch({ type: ACTIONS.ADD_DOCUMENTS, payload: response.data });
-        })
-        .catch((e) => {
-          return dispatch({
-            type: ACTIONS.ERROR,
-            payload: undefined,
-          });
-        });
-    };
-    editDocuments();
+  const addDocuments = () => {
+    useEffect(() => {
+      axios.post('/Documents').catch((e) => {
+        return '';
+      }),
+        [];
+    });
+  };
+
+  const documentOps = () => {
     addDocuments();
-  }, []);
+    editDocuments();
+  };
+
+  //Retrieve the data and status using UseQuery
+  const { data, error } = useQuery<Documents[]>('document_ops', documentOps);
+
+  // As explained in the commend at the top, the value are not initialised, therefore they can be undefined
+  const [document, setDocument] = React.useState<Documents[] | undefined>();
+
+  if (!error) {
+    setDocument(data);
+  }
+
   return (
-    <DocumentsApiService.Provider value={[state, dispatch]}>
+    <IDocumentContext.Provider value={[document, setDocument]}>
       {children}
-    </DocumentsApiService.Provider>
+    </IDocumentContext.Provider>
   );
 };
 
 export function useDocumentContext() {
-  const documents = useContext(DocumentsApiService);
+  const documents = useContext(IDocumentContext);
 
   if (documents == undefined) {
     throw new Error(
@@ -126,3 +83,9 @@ export function useDocumentContext() {
 }
 
 export default useDocumentContext;
+function useQuery<T>(
+  arg0: string,
+  getProducts: any
+): { data: any; error: any } {
+  throw new Error('Function not implemented.');
+}

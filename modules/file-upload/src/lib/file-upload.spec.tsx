@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import FileOptions from './FileOptions';
+import FileUpload from './file-upload';
 
-describe('FileOptions', () => {
+describe('FileUpload', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<FileOptions />);
+    const { baseElement } = render(<FileUpload />);
     expect(baseElement).toBeTruthy();
   });
 });

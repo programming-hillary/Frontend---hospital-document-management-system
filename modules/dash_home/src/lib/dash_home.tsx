@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import './dash-home.css';
 import DocCard from './DocCard/DocCard';
 import { useDocumentContext } from '@org.mwashi-mwale/documents_api_service';
@@ -7,7 +6,7 @@ import { useDocumentContext } from '@org.mwashi-mwale/documents_api_service';
 export interface DashHomeProps {}
 
 export function DashHome(props: DashHomeProps) {
- const documentContext = useDocumentContext()
+  const documentContext = useDocumentContext();
   return (
     <section className="main_dash">
       <div className="row">
@@ -18,11 +17,13 @@ export function DashHome(props: DashHomeProps) {
       </div>
 
       <DocCard
-        icon={documentContext!.icon}
-        category={documentContext!.category}
-        description={documentContext!.description}
-        date={documentContext!.date}
-        format={documentContext!.format}
+        icon={documentContext[0]!.at(0)!.icon}
+        category={documentContext[0]!.at(1)!.category}
+        description={documentContext[0]!.at(2)!.description}
+        date={documentContext[0]!.at(3)!.date}
+        format={documentContext[0]!.at(4)!.format}
+        name={documentContext[0]!.at(5)!.name}
+        builder_category={documentContext[0]!.at(6)!.builder_category}
       />
     </section>
   );

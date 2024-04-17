@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from './header/header/header'
 import Banner from './banner/banner'
 import Footer from './footer/footer'

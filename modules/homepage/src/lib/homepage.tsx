@@ -8,26 +8,23 @@ import {
   faQuestionCircle,
   faSearch,
   faSignOutAlt,
-  faTasks,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { faDochub } from '@fortawesome/free-brands-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
 import {
   DocumentProvider,
-  DocumentsApiService,
   useDocumentContext,
 } from '@org.mwashi-mwale/documents_api_service';
 import {
-  SearchApiService,
   SearchProvider,
   useSearchContext,
 } from '@org.mwashi-mwale/search_api_service';
 import {
-  VersionsApiService,
   VersionsProvider,
   useVersionsContext,
 } from '@org.mwashi-mwale/versions_api_service';
+import { FileUpload } from '@org.mwashi-mwale/file-upload'
 
 /* eslint-disable-next-line */
 export interface HomepageProps {}
@@ -134,6 +131,7 @@ export function Homepage(props: HomepageProps) {
                     <option>----------------------</option>
                   </select>
                 </div>
+                  <FileUpload />
                 <DocumentProvider>
                   <Outlet />
                 </DocumentProvider>

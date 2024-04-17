@@ -37,15 +37,19 @@
   text-align: right;
   font-size: smaller;
   color: rgb(76, 214, 252);
-  display: flex;
 }
 .doc_card:active {
   border: 2px solid blueviolet;
   transition: 0.4s;
 }
 
-.right {
+.right-top {
     font-size: 2rem;
     margin-left: 1rem;
     color: #eee;
+}
+.right-bottom {
+  font-size: 2rem;
+  margin-left: 1rem;
+  color: #eee;
 }

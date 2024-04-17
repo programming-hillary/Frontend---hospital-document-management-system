@@ -28,6 +28,7 @@
       "@org.mwashi-mwale/documents_api_service": [
         "api/documents_api_service/src/index.ts"
       ],
+      "@org.mwashi-mwale/file-upload": ["modules/file-upload/src/index.ts"],
       "@org.mwashi-mwale/forgot-password": [
         "modules/forgot-password/src/index.ts"
       ],

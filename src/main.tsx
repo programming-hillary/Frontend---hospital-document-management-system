@@ -2,8 +2,6 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
-  createRoutesFromElements,
-  Route,
   RouterProvider,
 } from 'react-router-dom';
 
@@ -21,7 +19,6 @@ import { Settings } from '@org.mwashi-mwale/settings';
 import { Help } from '@org.mwashi-mwale/help';
 import { Search } from '@org.mwashi-mwale/search';
 import { FileOptions } from '@org.mwashi-mwale/dash_home';
-import { UserApiService, useUserContext } from '@org.mwashi-mwale/api_service';
 import PageNotFound from './app/page-not-found/page-not-found';
 import SomethingWentWrong from './app/something-went-wrong/something-went-wrong';
 

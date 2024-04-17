@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import styles from './header.module.css';
 import { useNavigate } from 'react-router-dom';
-import { UserApiService } from '@org.mwashi-mwale/api_service';
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}
