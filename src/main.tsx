@@ -22,14 +22,14 @@ import { Help } from '@org.mwashi-mwale/help';
 import { Search } from '@org.mwashi-mwale/search';
 import { FileOptions } from '@org.mwashi-mwale/dash_home';
 import { UserApiService, useUserContext } from '@org.mwashi-mwale/api_service';
+import PageNotFound from './app/page-not-found/page-not-found';
+import SomethingWentWrong from './app/something-went-wrong/something-went-wrong';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: (
-      <h1>Code works, but something went wrong from the API side. 😜😜😜</h1>
-    ),
+    errorElement: <SomethingWentWrong />
   },
   {
     path: '/dashboard',
@@ -87,6 +87,10 @@ const router = createBrowserRouter([
     path: '/verify_email',
     element: <VerifyEmail />,
   },
+  {
+    path: '*',
+    element: <PageNotFound />
+  }
 ]);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
