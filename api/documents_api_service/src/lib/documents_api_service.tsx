@@ -29,6 +29,7 @@ interface Props {
   children: ReactNode;
 }
 
+
 export const DocumentProvider = ({ children }: Props) => {
   const editDocuments = () => {
     useEffect(() => {
@@ -44,14 +45,21 @@ export const DocumentProvider = ({ children }: Props) => {
       axios.post('/Documents').catch((e) => {
         return '';
       }),
-        [];
+      [];
     });
   };
 
   const documentOps = () => {
-    addDocuments();
-    editDocuments();
-  };
+    addDocuments()
+    editDocuments()
+  }
+
+  function useQuery<T>(
+    arg0: string,
+    documentOps: any
+  ): { data: any; error: any } {
+    return documentOps
+  }
 
   //Retrieve the data and status using UseQuery
   const { data, error } = useQuery<Documents[]>('document_ops', documentOps);
@@ -83,9 +91,3 @@ export function useDocumentContext() {
 }
 
 export default useDocumentContext;
-function useQuery<T>(
-  arg0: string,
-  getProducts: any
-): { data: any; error: any } {
-  throw new Error('Function not implemented.');
-}

@@ -3,6 +3,7 @@ import type { UploadProps } from 'antd';
 import { message, Upload } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, FormProps, Input } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 
 const formItemLayout = {
   labelCol: {
@@ -24,8 +25,7 @@ const formItemLayoutWithOutLabel = {
 
 type FieldType = {
   username?: string;
-  password?: string;
-  remember?: string;
+  description?: string;
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -40,8 +40,8 @@ const { Dragger } = Upload;
 
 const props: UploadProps = {
   name: 'file',
-  multiple: true,
-  action: 'https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload',
+  multiple: false,
+  action: '',
   onChange(info) {
     const { status } = info.file;
     if (status !== 'uploading') {
@@ -73,26 +73,25 @@ const uploadForm: React.FC = () => {
       <Form.Item<FieldType>
         label="Username"
         name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ message: 'Please input your username!' }]}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
+      <Form.Item<FieldType> label="description" name="description">
+        <TextArea
+          placeholder=""
+          autoSize={{ minRows: 2, maxRows: 6 }}
+        />
       </Form.Item>
 
       <Form.List
-        name="names"
+        name="document_uploads"
         rules={[
           {
             validator: async (_, names) => {
               if (!names || names.length < 2) {
-                return Promise.reject(new Error('At least 2 passengers'));
+                return Promise.reject(new Error('At least 2 documents'));
               }
             },
           },
@@ -103,7 +102,7 @@ const uploadForm: React.FC = () => {
             {fields.map((field, index) => (
               <Form.Item
                 {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-                label={index === 0 ? 'Passengers' : ''}
+                label={index === 0 ? 'Documents' : ''}
                 required={false}
                 key={field.key}
               >
@@ -114,13 +113,15 @@ const uploadForm: React.FC = () => {
                     {
                       required: true,
                       whitespace: true,
-                      message:
-                        "Please upload your document.",
+                      message: 'Please upload your document.',
                     },
                   ]}
                   noStyle
                 >
-                  <Dragger {...props}>
+                  <Dragger
+                    {...props}
+                    accept=".json,.csv,.txt,.text,application/json,text/csv,text/plain,.pdf,.doc,.xml,.docx,.xls,.ott,.wps,.pages,.pptx,.pub,.odt"
+                  >
                     <p className="ant-upload-drag-icon">
                       <InboxOutlined />
                     </p>
@@ -128,8 +129,7 @@ const uploadForm: React.FC = () => {
                       Click or drag file to this area to upload
                     </p>
                     <p className="ant-upload-hint">
-                      Support for a single or bulk upload. Strictly prohibited
-                      from uploading company data or other banned files.
+                      Support for a single file uploads per input area. <br /> Click on add more documents below to add more than one document.
                     </p>
                   </Dragger>
                 </Form.Item>
@@ -141,11 +141,10 @@ const uploadForm: React.FC = () => {
                 ) : null}
               </Form.Item>
             ))}
-            <Form.Item>
+            <Form.Item style={{marginBottom: 50}}>
               <Button
                 type="dashed"
                 onClick={() => add()}
-                style={{ width: '60%' }}
                 icon={<PlusOutlined />}
               >
                 Upload more another documents
@@ -155,12 +154,6 @@ const uploadForm: React.FC = () => {
           </>
         )}
       </Form.List>
-
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
     </Form>
   );
 };

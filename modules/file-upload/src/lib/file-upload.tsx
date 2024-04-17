@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Button, Modal } from 'antd';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
+import UploadForm from './upload-form';
 
 /* eslint-disable-next-line */
 export interface FileUploadProps {}
@@ -49,7 +50,7 @@ export function FileUpload(props: FileUploadProps) {
   };
   return (
     <div className={styles['container']}>
-      <Button onClick={showModal}>Open Draggable Modal</Button>
+      <Button onClick={showModal}>Add Document</Button>
       <Modal
         title={
           <div
@@ -68,7 +69,7 @@ export function FileUpload(props: FileUploadProps) {
             onFocus={() => {}}
             onBlur={() => {}}
           >
-            Draggable Modal
+            Document Upload Form
           </div>
         }
         open={open}
@@ -77,20 +78,11 @@ export function FileUpload(props: FileUploadProps) {
         confirmLoading={confirmLoading}
         footer={[
           <Button key="back" onClick={handleCancel}>
-            Return
+            Cancel
           </Button>,
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
             Submit
-          </Button>,
-          <Button
-            key="link"
-            href="https://google.com"
-            type="primary"
-            loading={loading}
-            onClick={handleOk}
-          >
-            Search on Google
-          </Button>,
+          </Button>
         ]}
         modalRender={(modal) => (
           <Draggable
@@ -103,7 +95,7 @@ export function FileUpload(props: FileUploadProps) {
           </Draggable>
         )}
       >
-        <FileUpload />
+        <UploadForm />
       </Modal>
     </div>
   );

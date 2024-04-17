@@ -12,27 +12,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faDochub } from '@fortawesome/free-brands-svg-icons';
 import { Link, Outlet } from 'react-router-dom';
-import {
-  DocumentProvider,
-  useDocumentContext,
-} from '@org.mwashi-mwale/documents_api_service';
-import {
-  SearchProvider,
-  useSearchContext,
-} from '@org.mwashi-mwale/search_api_service';
-import {
-  VersionsProvider,
-  useVersionsContext,
-} from '@org.mwashi-mwale/versions_api_service';
 import { FileUpload } from '@org.mwashi-mwale/file-upload'
 
 /* eslint-disable-next-line */
 export interface HomepageProps {}
 
 export function Homepage(props: HomepageProps) {
-  const documents = useDocumentContext();
-  const searches = useSearchContext();
-  const versions = useVersionsContext();
+  // const documents = useDocumentContext();
+  // const searches = useSearchContext();
+  // const versions = useVersionsContext();
   return (
     <div className={styles.wrapper}>
       <div className="my_container">
@@ -88,13 +76,13 @@ export function Homepage(props: HomepageProps) {
           </div>
         </nav>
 
-        <section className="main">
+        <section className="my_main">
           <div className="main-top">
             <p>Take care of what matters!</p>
           </div>
           <div className="main-body">
-            <SearchProvider>
-              <VersionsProvider>
+            {/*<SearchProvider>*/}
+              {/*<VersionsProvider>*/}
                 <h1>Hospital Documents</h1>
 
                 <div className="search_bar">
@@ -132,11 +120,11 @@ export function Homepage(props: HomepageProps) {
                   </select>
                 </div>
                   <FileUpload />
-                <DocumentProvider>
+                {/*<DocumentProvider>*/}
                   <Outlet />
-                </DocumentProvider>
-              </VersionsProvider>
-            </SearchProvider>
+                {/*</DocumentProvider>*/}
+              {/*</VersionsProvider>*/}
+            {/*</SearchProvider>*/}
           </div>
         </section>
       </div>

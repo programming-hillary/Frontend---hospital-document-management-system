@@ -57,7 +57,7 @@ nav .icon {
 }
 
 /* Main Section */
-.main {
+.my_main {
   width: 100%;
 }
 .main-top {
@@ -72,6 +72,8 @@ nav .icon {
 }
 .main-body {
   padding: 10px 10px 10px 20px;
+  display: flex;
+  flex-direction: row;
 }
 h1 {
   margin: 20px 10px;

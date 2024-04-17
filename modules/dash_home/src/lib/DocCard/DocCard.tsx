@@ -4,10 +4,21 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   faDeleteLeft,
   faDownload,
+  faEnvelope,
   faShareAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+} from 'react-share';
 import { DocumentCategory } from './document-category';
 import { BuilderCategory } from './builder-category';
+import { Link } from 'react-router-dom';
+import { Popconfirm, Button } from 'antd';
+import { useState } from 'react';
+import { faFacebook, faTelegram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 /* eslint-disable-next-line */
 export interface DocCardProps {
@@ -21,13 +32,45 @@ export interface DocCardProps {
 }
 
 export function DocCard(this: any, props: DocCardProps) {
-  const blob = new Blob();
-  const fileDownloadUrl = URL.createObjectURL(blob);
-  this.setState({ fileDownloadUrl: fileDownloadUrl }, () => {
-    this.dofileDownload.click();
-    URL.revokeObjectURL(fileDownloadUrl);
-    this.setState({ fileDownloadUrl: '' });
-  });
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const showPopconfirm = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    setConfirmLoading(true);
+
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setOpen(false);
+  };
+
+  const shareElem = () => {
+    return (
+      <div className={styles.popover}>
+      <FacebookShareButton url={'https://www.facebook.com/'}>
+        <FontAwesomeIcon icon={faFacebook} />
+      </FacebookShareButton>
+      <EmailShareButton url={'https://www.facebook.com/'}>
+        <FontAwesomeIcon icon={faEnvelope} />
+      </EmailShareButton>
+      <TelegramShareButton url={'https://www.facebook.com/'}>
+        <FontAwesomeIcon icon={faTelegram} />
+      </TelegramShareButton>
+      <WhatsappShareButton url={'https://www.facebook.com/'}>
+        <FontAwesomeIcon icon={faWhatsapp} />
+      </WhatsappShareButton>
+      </div>
+    )
+  }
 
   const content = (
     <div
@@ -38,27 +81,26 @@ export function DocCard(this: any, props: DocCardProps) {
         justifyContent: 'space-between',
       }}
     >
-      <a
-        download={this.fileNames[this.state.fileType]}
-        href={this.state.fileDownloadUrl}
-        ref={(e) => (this.dofileDownload = e)}
+      <Popconfirm
+        title="Choose social media app"
+        description={shareElem}
+        open={open}
+        onConfirm={handleOk}
+        okButtonProps={{ loading: confirmLoading }}
+        onCancel={handleCancel}
+        style={{}}
       >
-        <FontAwesomeIcon icon={faShareAlt} className={styles.pop_icons} />
-      </a>
-      <a
-        download={this.fileNames[this.state.fileType]}
-        href={this.state.fileDownloadUrl}
-        ref={(e) => (this.dofileDownload = e)}
-      >
+        <a type="button" onClick={showPopconfirm}>
+          <FontAwesomeIcon icon={faShareAlt} className={styles.pop_icons} />
+        </a>
+      </Popconfirm>
+      <Link to="" target="_blank" download></Link>
+      <Link to="" target="_blank" download>
         <FontAwesomeIcon icon={faDownload} className={styles.pop_icons} />
-      </a>
-      <a
-        download={this.fileNames[this.state.fileType]}
-        href={this.state.fileDownloadUrl}
-        ref={(e) => (this.dofileDownload = e)}
-      >
+      </Link>
+      <Link to="" target="_blank" download>
         <FontAwesomeIcon icon={faDeleteLeft} className={styles.pop_icons} />
-      </a>
+      </Link>
     </div>
   );
 
