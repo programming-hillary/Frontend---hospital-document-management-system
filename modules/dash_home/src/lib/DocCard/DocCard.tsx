@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './DocCard.module.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
-  faDeleteLeft,
   faDownload,
   faEnvelope,
   faShareAlt,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   EmailShareButton,
@@ -16,9 +16,13 @@ import {
 import { DocumentCategory } from './document-category';
 import { BuilderCategory } from './builder-category';
 import { Link } from 'react-router-dom';
-import { Popconfirm, Button } from 'antd';
+import { Popover } from 'antd';
 import { useState } from 'react';
-import { faFacebook, faTelegram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import {
+  faFacebook,
+  faTelegram,
+  faWhatsapp,
+} from '@fortawesome/free-brands-svg-icons';
 
 /* eslint-disable-next-line */
 export interface DocCardProps {
@@ -33,18 +37,23 @@ export interface DocCardProps {
 
 export function DocCard(this: any, props: DocCardProps) {
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [docData] = useUserContext()
+
+  const hide = () => {
+    setOpen(false);
+  };
+
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
+  };
 
   const showPopconfirm = () => {
     setOpen(true);
   };
 
   const handleOk = () => {
-    setConfirmLoading(true);
-
     setTimeout(() => {
       setOpen(false);
-      setConfirmLoading(false);
     }, 2000);
   };
 
@@ -56,21 +65,21 @@ export function DocCard(this: any, props: DocCardProps) {
   const shareElem = () => {
     return (
       <div className={styles.popover}>
-      <FacebookShareButton url={'https://www.facebook.com/'}>
-        <FontAwesomeIcon icon={faFacebook} />
-      </FacebookShareButton>
-      <EmailShareButton url={'https://www.facebook.com/'}>
-        <FontAwesomeIcon icon={faEnvelope} />
-      </EmailShareButton>
-      <TelegramShareButton url={'https://www.facebook.com/'}>
-        <FontAwesomeIcon icon={faTelegram} />
-      </TelegramShareButton>
-      <WhatsappShareButton url={'https://www.facebook.com/'}>
-        <FontAwesomeIcon icon={faWhatsapp} />
-      </WhatsappShareButton>
+        <FacebookShareButton url={'https://www.facebook.com/'}>
+          <FontAwesomeIcon icon={faFacebook} />
+        </FacebookShareButton>
+        <EmailShareButton url={'https://www.facebook.com/'}>
+          <FontAwesomeIcon icon={faEnvelope} />
+        </EmailShareButton>
+        <TelegramShareButton url={'https://www.facebook.com/'}>
+          <FontAwesomeIcon icon={faTelegram} />
+        </TelegramShareButton>
+        <WhatsappShareButton url={'https://www.facebook.com/'}>
+          <FontAwesomeIcon icon={faWhatsapp} />
+        </WhatsappShareButton>
       </div>
-    )
-  }
+    );
+  };
 
   const content = (
     <div
@@ -81,50 +90,59 @@ export function DocCard(this: any, props: DocCardProps) {
         justifyContent: 'space-between',
       }}
     >
-      <Popconfirm
-        title="Choose social media app"
-        description={shareElem}
+      <Popover
+        title=""
+        
         open={open}
-        onConfirm={handleOk}
-        okButtonProps={{ loading: confirmLoading }}
-        onCancel={handleCancel}
-        style={{}}
+        style={{width: 300, height: 300}}
       >
         <a type="button" onClick={showPopconfirm}>
-          <FontAwesomeIcon icon={faShareAlt} className={styles.pop_icons} />
         </a>
-      </Popconfirm>
+      </Popover>
+      <Popover
+        content={shareElem}
+        title="Choose social media app"
+        open={open}
+        placement="bottom"
+        onOpenChange={handleOpenChange}
+      >
+          <FontAwesomeIcon icon={faShareAlt} className={styles.pop_icons} />
+      </Popover>
       <Link to="" target="_blank" download></Link>
       <Link to="" target="_blank" download>
         <FontAwesomeIcon icon={faDownload} className={styles.pop_icons} />
       </Link>
       <Link to="" target="_blank" download>
-        <FontAwesomeIcon icon={faDeleteLeft} className={styles.pop_icons} />
+        <FontAwesomeIcon icon={faTrash} className={styles.pop_icons} />
       </Link>
     </div>
   );
 
   return (
-    <div className="doc_card">
-      <div className="doc_details">
-        <div className="img">
-          <FontAwesomeIcon icon={props.icon} className="icon" />
+      <div className={styles.doc_card}>
+      <div className={styles.doc_details}>
+        <div className={styles.img}>
+          <FontAwesomeIcon icon={props.icon} className={styles.icon} />
         </div>
-        <div className="text">
+        <div className={styles.text}>
           <h2>{props.category}</h2>
           <span>{props.description}</span>
         </div>
       </div>
-      <div className="doc_format">
-        <div className="right-top">
+      <div className={styles.doc_format}>
+        <div className={styles.rightTop}>
           <h4>{props.format}</h4>
           <div style={{ borderLeft: '6px solid whiite', height: '100%' }}></div>
           <span>{props.date}</span>
         </div>
-        <div className="right-bottom">{content}</div>
+        <div className={styles.rightBottom}>{content}</div>
       </div>
-    </div>
+    </div>    
   );
 }
 
 export default DocCard;
+function useUserContext(): [any] {
+  throw new Error('Function not implemented.');
+}
+

@@ -31,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Homepage />,
+    errorElement: <SomethingWentWrong />,
     children: [
       {
         path: '',
@@ -71,18 +72,22 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+    errorElement: <SomethingWentWrong />,
   },
   {
     path: '/register',
     element: <SignUp />,
+    errorElement: <SomethingWentWrong />,
   },
   {
     path: '/forgot_password',
     element: <ForgotPassword />,
+    errorElement: <SomethingWentWrong />,
   },
   {
     path: '/verify_email',
     element: <VerifyEmail />,
+    errorElement: <SomethingWentWrong />,
   },
   {
     path: '*',
@@ -93,7 +98,5 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
 );
